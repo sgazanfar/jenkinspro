@@ -3,8 +3,8 @@ pipeline {
     environment {
         AWS_ACCOUNT_ID="486362167312"
         AWS_DEFAULT_REGION="us-east-1"
-        IMAGE_REPO_NAME="funny-repo"
-        IMAGE_TAG="latest"
+        IMAGE_REPO_NAME="funnyprojectrepo"
+        IMAGE_TAG="V1"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
     }
    
@@ -13,7 +13,8 @@ pipeline {
          stage('Logging into AWS ECR') {
             steps {
                 script {
-                sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+                sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS 
+--password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
                 }
                  
             }
@@ -21,7 +22,7 @@ pipeline {
         
         stage('Cloning Git') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/sgazanfar/jenkinspro.git']])
+                checkout 
             }
         }
   
